@@ -1,192 +1,294 @@
 program JogoDaVelha;
 uses Crt;
 var
-    tab:array[1..3,1..3] of integer;
-    i,j,venc,vez,posi,num:integer;
-    jog:boolean;
-   
+  campo : array[1..3, 1..3] of char;
+  p1,p2: integer;
+  win,vez,pos,num: integer;
+  scoreJogador1, scoreJogador2 : integer;
+  jogada : boolean;
+ 
 begin
-    for i:=1 to 3 do
-    begin
-        for j:=1 to 3 do
+
+ writeln('****************************');
+ writeln('** Welcome to tic-tac-toe **');
+ writeln('****************************');
+ 
+ //-começa aqui
+ writeln('See the list code and choose the house you want to play on');
+ 
+ //-aqui ajudamos criando a lista de jogadas
+ writeln('_____________');
+ writeln('| 1 | 2 | 3 |');
+ writeln('| - | - | - |');
+ writeln('| 4 | 5 | 6 |');
+ writeln('| - | - | - |');
+ writeln('| 7 | 8 | 9 |');
+ writeln('-------------');
+ 
+ 
+ //-placar
+ 
+ scoreJogador1:= 0;
+ scoreJogador2:=0;
+ 
+ //-Jogo da velha
+ 
+ 
+ 
+writeln('- – – – – –– – – – – -');
+writeln('- - - – Placar – – – -');
+writeln('- – – – – –– – – – – -');
+writeln();
+writeln('Jogador 1: ',scoreJogador1);
+writeln('Jogador 2: ',scoreJogador2);
+ 
+ writeln('choose the house');
+ writeln('player 1s turn');
+ 
+ writeln('_____________');
+ writeln('| _ | _ | _ |');
+ writeln('| _ | _ | _ |');
+ writeln('| _ | _ | _ |');
+ writeln('-------------');
+ 
+ //-Lógica
+ for p1:= 1 to 3 do
+   begin
+     for p2:= 1 to 3 do
+       begin
+         campo[p1,p2]:= '_' ;
+        end;
+    end;
+    win:=0;
+    vez:=1;
+    num:=0;
+
+    while (win=0 ) do
+     begin
+      num:=num+1;
+       Clrscr;
+
+ writeln('_____________');
+ writeln('| ',campo[1,1],' | ',campo[1,2],' | ',campo[1,3],' |');
+ writeln('| ',campo[2,1],' | ',campo[2,2],' | ',campo[2,3],' |');
+ writeln('| ',campo[3,1],' | ',campo[3,2],' | ',campo[3,3],' |');
+ writeln('-------------');
+ 
+ repeat
+    jogada:= false;
+     writeln('choose the house',vez,':');
+     read(pos);
+     
+     if(pos=1) then
+      begin
+        if campo[1,1]= '_' then
         begin
-            tab[i,j]:=0;
+          campo[1,1]:='_';
+          jogada:= true;
         end;
     end;
    
-    venc:=0;
-    vez:=1;
-    num:=0;
+    if(pos=2) then
+      begin
+        if campo[1,2]='_' then
+        begin
+          campo[1,2]:= '_';
+          jogada:= true;
+        end;
+    end;
    
-    while (venc=0) do
-    begin
-    num:=num+1;
-        ClrScr;
-       
-        writeln();
-        writeln('  ',tab[1,1],' | ',tab[1,2],' | ',tab[1,3]);
-        writeln(' ___|___|___');
-        writeln('  ',tab[2,1],' | ',tab[2,2],' | ',tab[2,3]);
-        writeln(' ___|___|___');
-        writeln('  ',tab[3,1],' | ',tab[3,2],' | ',tab[3,3]);
-        writeln();
-       
-        repeat
-            jog:= false;
-         
-            write('Informe uma posição do jogador',vez,':');
-            read(posi);
-         
-            if(posi=1) then
-            begin
-                if tab[3,1]=0 then
-                begin
-                    tab[3,1]:= vez;
-                    jog:= true;
-                end;
-            end;
-         
-            if(posi=2) then
-            begin
-                if tab[3,2]=0 then
-                begin
-                    tab[3,2]:= vez;
-                    jog:= true;
-                end;
-            end;
-           
-            if(posi=3) then
-            begin
-                if tab[3,3]=0 then
-                begin
-                    tab[3,3]:= vez;
-                    jog:= true;
-                end;
-            end;
-           
-            if(posi=4) then
-            begin
-                if tab[2,1]=0 then
-                begin
-                    tab[2,1]:= vez;
-                    jog:= true;
-                end;
-            end;
-           
-            if(posi=5) then
-            begin
-                if tab[2,2]=0 then
-                begin
-                    tab[2,2]:= vez;
-                    jog:= true;
-                end;
-            end;
-           
-            if(posi=6) then
-            begin
-                if tab[2,3]=0 then
-                begin
-                    tab[2,3]:= vez;
-                    jog:= true;
-                end;
-            end;
-           
-            if(posi=7) then
-            begin
-                if tab[1,1]=0 then
-                begin
-                    tab[1,1]:= vez;
-                    jog:= true;
-                end;
-            end;
-           
-            if(posi=8) then
-            begin
-                if tab[1,2]=0 then
-                begin
-                    tab[1,2]:= vez;
-                    jog:= true;
-                end;
-            end;
-           
-            if(posi=9) then
-            begin
-                if tab[1,3]=0 then
-                begin
-                    tab[1,3]:= vez;
-                    jog:= true;
-                end;
-            end;
-           
-            if (posi<>1 or 2) then
-                writeln('Posição inválida, tente novamente!!! ');
-        until (jog=true);
-       
-        //verificar se algum jogador ganhou
-       
-        if (tab[3,1] = tab[3,2]) and (tab[3,1] = tab[3,3]) and (tab[3,1] <> 0) then
+    if(pos=3) then
+      begin
+        if campo[1,3]='_' then
         begin
-            write('Jogador ganhou');
-            venc:=1
+          campo[1,3]:= '_';
+          jogada:= true;
         end;
-       
-        if (tab[2,1] = tab[2,2]) and (tab[2,1] = tab[2,3]) and (tab[2,1] <> 0) then
+    end;
+   
+    if(pos=4) then
+      begin
+        if campo[2,1]='_' then
         begin
-            write('Jogador ganhou');
-            venc:=1
+          campo[2,1]:= '_';
+          jogada:= true;
         end;
-       
-        if (tab[1,1] = tab[1,2]) and (tab[1,1] = tab[1,3]) and (tab[1,1] <> 0) then
+    end;
+   
+    if(pos=5) then
+      begin
+        if campo[2,2]= '_' then
         begin
-            write('Jogador ganhou');
-            venc:=1
+          campo[2,2]:= '_';
+          jogada:= true;
         end;
-       
-        if (tab[1,1] = tab[2,1]) and (tab[1,1] = tab[3,1]) and (tab[1,1] <> 0) then
+    end;
+   
+    if(pos=6) then
+      begin
+        if campo[2,3]='_' then
         begin
-            write('Jogador ganhou');
-            venc:=1
+          campo[2,3]:= '_';
+          jogada:= true;
         end;
-       
-        if (tab[1,2] = tab[2,2]) and (tab[1,2] = tab[3,2]) and (tab[1,2] <> 0) then
+    end;
+   
+    if(pos=7) then
+      begin
+        if campo[3,1]= '_'then
         begin
-            write('Jogador ganhou');
-            venc:=1
+          campo[3,1]:= '_';
+          jogada:= true;
         end;
-       
-        if (tab[1,3] = tab[2,3]) and (tab[1,3] = tab[3,3]) and (tab[1,3] <> 0) then
+    end;
+   
+   
+    if(pos=8) then
+      begin
+        if campo[3,2]= '_'then
         begin
-            write('Jogador ganhou');
-            venc:=1
+          campo[3,2]:= '_';
+          jogada:= true;
         end;
-       
-        if (tab[1,1] = tab[2,2]) and (tab[1,1] = tab[3,3]) and (tab[1,1] <> 0) then
+    end;
+   
+    if(pos=9) then
+      begin
+        if campo[3,3]= '_' then
         begin
-            write('Jogador ganhou');
-            venc:=1
+          campo[3,3]:= '_';
+          jogada:= true;
         end;
-       
-        if (tab[1,3] = tab[2,2]) and (tab[1,3] = tab[3,1]) and (tab[1,3] <> 0) then
-        begin
-            write('Jogador ganhou');
-            venc:=1
-        end;
-       
-        if num>8 then
-        begin
-            if venc<>1 then
-            begin
-                write('Empate!');
-                venc:=1
-            end;
-        end;
-       
-       
-       
-        if (vez = 1) then
-            vez := 2
-        else
-            vez := 1;
-        end;        
-    end.
+    end;
+   
+    if(pos<>1 or 2) then
+    writeln('invalid move! ');
+    until(jogada=true);
 
+//--horizontal vitória p1
+   
+    if (campo[1,1] = campo[1,2] and campo[1,1] = campo[1,3] and campo[1,1] = 'X' and campo[1,1] <>  )
+    begin
+    writeln('player_1 won');
+    scoreJogador1 = scoreJogador1+1;
+    venc:=1;
+    end;
+    
+    if (campo[2,1] = campo[2,2] and campo[2,1] = campo[2,3] and campo[2,1] = 'X' and campo[2,1] <>  )
+    begin
+    writeln('player_1 won');
+    scoreJogador1 = scoreJogador1+1;
+    venc:=1;
+    end;
+    
+    if (campo[3,1] = campo[3,2] and campo[3,1] = campo[3,3] and campo[3,1] = 'X' and campo[3,1] <>  )
+    begin
+    writeln('player_1 won');
+    scoreJogador1 = scoreJogador1+1;
+    venc:=1;
+    end;
+    
+//--vertical vitória p1
+    
+    if (campo[1,1] = campo[2,1] and campo[1,1] = campo[3,1] and campo[1,1] = 'X' and campo[1,1] <>  )
+    begin
+    writeln('player_1 won');
+    scoreJogador1 = scoreJogador1+1;
+    venc:=1;
+    end;
+    
+    if (campo[1,2] = campo[2,2] and campo[1,2] = campo[3,2] and campo[1,2] = 'X' and campo[1,2] <>  )
+    begin
+    writeln('player_1 won');
+    scoreJogador1 = scoreJogador1+1;
+    venc:=1;
+    end;
+    
+    if (campo[1,3] = campo[2,3] and campo[1,3] = campo[3,3] and campo[1,3] = 'X' and campo[1,3] <>  )
+    begin
+    writeln('player_1 won');
+    scoreJogador1 = scoreJogador1+1;
+    venc:=1;
+    end;
+    
+//--diagonal vitória p1    
+    
+    if (campo[1,3] = campo[2,2] and campo[1,3] = campo[3,1] and campo[1,3] = 'X' and campo[3,1] <>  )
+    begin
+    writeln('player_1 won');
+    scoreJogador1 = scoreJogador1+1;
+    venc:=1;
+    end;
+    
+    if (campo[1,1] = campo[2,2] and campo[1,1] = campo[3,3] and campo[1,1] = 'X' and campo[1,1] <>  )
+    begin
+    writeln('player_1 won');
+    scoreJogador1 = scoreJogador1+1;
+    venc:=1;
+    end;
+    
+    
+    
+//--horizontal vitória p2
+   
+    if (campo[1,1] = campo[1,2] and campo[1,1] = campo[1,3] and campo[1,1] = 'o' and campo[1,1] <>  )
+    begin
+    writeln('player_2 won');
+    scoreJogador2 = scoreJogador2+1;
+    venc:=1;
+    end;
+    
+    if (campo[2,1] = campo[2,2] and campo[2,1] = campo[2,3] and campo[2,1] = 'o' and campo[2,1] <>  )
+    begin
+    writeln('player_2 won');
+    scoreJogador2 = scoreJogador2+1;
+    venc:=1;
+    end;
+    
+    if (campo[3,1] = campo[3,2] and campo[3,1] = campo[3,3] and campo[3,1] = 'o' and campo[3,1] <>  )
+    begin
+    writeln('player_2 won');
+    scoreJogador2 = scoreJogador2+1;
+    venc:=1;
+    end;
+    
+//--vertical vitória p1
+    
+    if (campo[1,1] = campo[2,1] and campo[1,1] = campo[3,1] and campo[1,1] = 'o' and campo[1,1] <>  )
+    begin
+    writeln('player_2 won');
+    scoreJogador2 = scoreJogador2+1;
+    venc:=1;
+    end;
+    
+    if (campo[1,2] = campo[2,2] and campo[1,2] = campo[3,2] and campo[1,2] = 'o' and campo[1,2] <>  )
+    begin
+    writeln('player_2 won');
+    scoreJogador2 = scoreJogador2+1;
+    venc:=1;
+    end;
+    
+    if (campo[1,3] = campo[2,3] and campo[1,3] = campo[3,3] and campo[1,3] = 'o' and campo[1,3] <>  )
+    begin
+    writeln('player_2 won');
+    scoreJogador2 = scoreJogador2+1;
+    venc:=1;
+    end;
+    
+//--diagonal vitória p2    
+    
+    if (campo[1,3] = campo[2,2] and campo[1,3] = campo[3,1] and campo[1,3] = 'o' and campo[3,1] <>  )
+    begin
+    writeln('player_2 won');
+    scoreJogador2 = scoreJogador2+1;
+    venc:=1;
+    end;
+    
+    if (campo[1,1] = campo[2,2] and campo[1,1] = campo[3,3] and campo[1,1] = 'o' and campo[1,1] <>  )
+    begin
+    writeln('player_2 won');
+    scoreJogador2 = scoreJogador2+1;
+    venc:=1;
+    end;
+    
+end.
