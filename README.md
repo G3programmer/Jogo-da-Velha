@@ -2,9 +2,9 @@
 //--Jogo da velha com códigos de área. Para jogar, o jogador deve selecionar a área que deseja marcar usando a tabela de marcação.
 A Grade do jogo é baseada na seguinte tabela:
 _____________
-| 1 | 2 | 3 |
-| 4 | 5 | 6 |
-| 7 | 8 | 9 |
+| 1 | 2 | 3 | / 1 line
+| 4 | 5 | 6 | / 2 line
+| 7 | 8 | 9 | / 3 line
 -------------
 
 Obs: 
